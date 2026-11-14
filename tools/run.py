@@ -5,7 +5,9 @@ import json
 import math
 import os
 from pathlib import Path
+import shutil
 import subprocess
+import tempfile
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 from world import write_world
@@ -26,14 +28,17 @@ def run_case(case, output, port, movie=False):
             f"--duration={case['duration']}", f"--csv={fresh_csv.as_posix()}", "--batch=1"]
     movie_path = csv_path.with_suffix(".mp4")
     fresh_movie = movie_path.with_name(f".{token}.mp4")
-    if movie:
-        args.append(f"--movie={fresh_movie.as_posix()}")
-    write_world(world, case["cart_mass"], case["rod_mass"], case["length"], case["initial_angle_deg"], args)
+    # Webots R2025a on Windows can crash in Qt when recording to long absolute output paths.
+    capture_dir = tempfile.TemporaryDirectory(prefix="wb-") if movie else None
     command = [str(WEBOTS), "--batch", "--mode=fast", "--stdout", "--stderr", f"--port={port}"]
     if not movie:
         command += ["--no-rendering", "--minimize"]
     command.append(str(world))
     try:
+        if capture_dir:
+            capture = Path(capture_dir.name) / "demo.mp4"
+            args.append(f"--movie={capture.as_posix()}")
+        write_world(world, case["cart_mass"], case["rod_mass"], case["length"], case["initial_angle_deg"], args)
         child = subprocess.Popen(command, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         try:
             raw, _ = child.communicate(timeout=240 if movie else 90)
@@ -53,8 +58,9 @@ def run_case(case, output, port, movie=False):
         if not failed and float(last["time_s"]) < case["duration"] - .0041:
             raise ValueError(f"Incomplete trace: {case_id} {last['time_s']}")
         if movie:
-            if not fresh_movie.exists() or fresh_movie.stat().st_size < 1000:
-                raise ValueError(f"Missing Webots recording: {fresh_movie}")
+            if not capture.exists() or capture.stat().st_size < 1000:
+                raise ValueError(f"Missing Webots recording: {capture}")
+            shutil.copyfile(capture, fresh_movie)
             fresh_movie.replace(movie_path)
         fresh_csv.replace(csv_path)
         print(f"{case_id}: {len(rows)} rows; t={last['time_s']}; x={last['x_m']}; theta={last['theta_rad']}", flush=True)
@@ -63,6 +69,8 @@ def run_case(case, output, port, movie=False):
         world.with_name("." + world.stem + ".wbproj").unlink(missing_ok=True)
         fresh_csv.unlink(missing_ok=True)
         fresh_movie.unlink(missing_ok=True)
+        if capture_dir:
+            capture_dir.cleanup()
 
 
 def main():
