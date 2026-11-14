@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <chrono>
 #include <cmath>
+#include <cstdlib>
 #include <filesystem>
 #include <fstream>
 #include <iomanip>
@@ -172,6 +173,17 @@ void simulate(webots::Supervisor &robot, const Options &options) {
           << omega << ',' << force << ',' << external << '\n';
     if ((!options.batch || recordMovie) && (ms % 40 == 0 || end))
       overlay(robot, options, ms, reference, x, theta, external, failed);
+    if (!finiteRun && !failed && ms == endMs) {
+      std::cout << std::setprecision(10) << "BALANCE_DEMO algorithm=" << options.algorithm
+                << " time=" << ms / 1000.0 << " target=" << reference << " x=" << x
+                << " theta=" << theta << std::endl;
+      const char *check = std::getenv("BALANCE_VERIFY_DEFAULT");
+      if (check && std::string(check) == "1") {
+        robot.simulationQuit(0);
+        robot.step(physicsMs);
+        return;
+      }
+    }
     motor->setForce(force);
     if (end) {
       if (log.is_open())

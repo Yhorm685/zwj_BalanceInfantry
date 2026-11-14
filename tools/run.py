@@ -24,10 +24,10 @@ def run_case(case, output, port, movie=False):
     fresh_csv = csv_path.with_name(f".{token}.csv")
     args = [f"--algorithm={case['algorithm']}", f"--scenario={case['scenario']}",
             f"--duration={case['duration']}", f"--csv={fresh_csv.as_posix()}", "--batch=1"]
-    movie_path = ROOT / "evidence/video" / f"{case_id}.mp4"
+    movie_path = csv_path.with_suffix(".mp4")
+    fresh_movie = movie_path.with_name(f".{token}.mp4")
     if movie:
-        movie_path.parent.mkdir(parents=True, exist_ok=True)
-        args.append(f"--movie={movie_path.as_posix()}")
+        args.append(f"--movie={fresh_movie.as_posix()}")
     write_world(world, case["cart_mass"], case["rod_mass"], case["length"], case["initial_angle_deg"], args)
     command = [str(WEBOTS), "--batch", "--mode=fast", "--stdout", "--stderr", f"--port={port}"]
     if not movie:
@@ -52,14 +52,17 @@ def run_case(case, output, port, movie=False):
         failed = any(not math.isfinite(float(n)) for n in last.values()) or abs(float(last["x_m"])) >= 1.5 or abs(float(last["theta_rad"])) >= math.radians(30)
         if not failed and float(last["time_s"]) < case["duration"] - .0041:
             raise ValueError(f"Incomplete trace: {case_id} {last['time_s']}")
-        if movie and (not movie_path.exists() or movie_path.stat().st_size < 1000):
-            raise ValueError(f"Missing Webots recording: {movie_path}")
+        if movie:
+            if not fresh_movie.exists() or fresh_movie.stat().st_size < 1000:
+                raise ValueError(f"Missing Webots recording: {fresh_movie}")
+            fresh_movie.replace(movie_path)
         fresh_csv.replace(csv_path)
         print(f"{case_id}: {len(rows)} rows; t={last['time_s']}; x={last['x_m']}; theta={last['theta_rad']}", flush=True)
     finally:
         world.unlink(missing_ok=True)
         world.with_name("." + world.stem + ".wbproj").unlink(missing_ok=True)
         fresh_csv.unlink(missing_ok=True)
+        fresh_movie.unlink(missing_ok=True)
 
 
 def main():

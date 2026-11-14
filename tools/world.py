@@ -37,3 +37,14 @@ def write_world(path, cart_mass, rod_mass, length, initial_angle_deg, args):
     if fields:
         raise ValueError(f"world template is missing fields: {', '.join(fields)}")
     Path(path).write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Create a local GUI demo with the selected controller.")
+    parser.add_argument("algorithm", choices=["pid", "lqr"])
+    algorithm = parser.parse_args().algorithm
+    path = TEMPLATE.with_name(f".generated-demo-{algorithm}.wbt")
+    write_world(path, 1.0, 0.2, 0.6, 5.0, [f"--algorithm={algorithm}", "--scenario=demo"])
+    print(path)
