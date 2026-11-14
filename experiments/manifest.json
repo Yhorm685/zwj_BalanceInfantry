@@ -1,0 +1,450 @@
+[
+  {
+    "id": "pid-initial",
+    "algorithm": "pid",
+    "scenario": "initial",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.6,
+    "initial_angle_deg": 5,
+    "duration": 14,
+    "groups": [
+      "initial"
+    ]
+  },
+  {
+    "id": "pid-step",
+    "algorithm": "pid",
+    "scenario": "step",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.6,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "step"
+    ]
+  },
+  {
+    "id": "pid-pulse",
+    "algorithm": "pid",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.6,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "pulse",
+      "scan"
+    ]
+  },
+  {
+    "id": "pid-cart-80",
+    "algorithm": "pid",
+    "scenario": "pulse",
+    "cart_mass": 0.8,
+    "rod_mass": 0.2,
+    "length": 0.6,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "perturb"
+    ]
+  },
+  {
+    "id": "pid-mass-80",
+    "algorithm": "pid",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.16,
+    "length": 0.6,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "perturb"
+    ]
+  },
+  {
+    "id": "pid-cart-120",
+    "algorithm": "pid",
+    "scenario": "pulse",
+    "cart_mass": 1.2,
+    "rod_mass": 0.2,
+    "length": 0.6,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "perturb"
+    ]
+  },
+  {
+    "id": "pid-mass-120",
+    "algorithm": "pid",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.24,
+    "length": 0.6,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "perturb"
+    ]
+  },
+  {
+    "id": "pid-length-50",
+    "algorithm": "pid",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.3,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "scan"
+    ]
+  },
+  {
+    "id": "pid-length-60",
+    "algorithm": "pid",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.36,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "scan"
+    ]
+  },
+  {
+    "id": "pid-length-70",
+    "algorithm": "pid",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.42,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "scan"
+    ]
+  },
+  {
+    "id": "pid-length-80",
+    "algorithm": "pid",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.48,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "perturb",
+      "scan"
+    ]
+  },
+  {
+    "id": "pid-length-90",
+    "algorithm": "pid",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.54,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "scan"
+    ]
+  },
+  {
+    "id": "pid-length-110",
+    "algorithm": "pid",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.66,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "scan"
+    ]
+  },
+  {
+    "id": "pid-length-120",
+    "algorithm": "pid",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.72,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "perturb",
+      "scan"
+    ]
+  },
+  {
+    "id": "pid-length-130",
+    "algorithm": "pid",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.78,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "scan"
+    ]
+  },
+  {
+    "id": "pid-length-140",
+    "algorithm": "pid",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.84,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "scan"
+    ]
+  },
+  {
+    "id": "pid-length-150",
+    "algorithm": "pid",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.9,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "scan"
+    ]
+  },
+  {
+    "id": "lqr-initial",
+    "algorithm": "lqr",
+    "scenario": "initial",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.6,
+    "initial_angle_deg": 5,
+    "duration": 14,
+    "groups": [
+      "initial"
+    ]
+  },
+  {
+    "id": "lqr-step",
+    "algorithm": "lqr",
+    "scenario": "step",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.6,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "step"
+    ]
+  },
+  {
+    "id": "lqr-pulse",
+    "algorithm": "lqr",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.6,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "pulse",
+      "scan"
+    ]
+  },
+  {
+    "id": "lqr-cart-80",
+    "algorithm": "lqr",
+    "scenario": "pulse",
+    "cart_mass": 0.8,
+    "rod_mass": 0.2,
+    "length": 0.6,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "perturb"
+    ]
+  },
+  {
+    "id": "lqr-mass-80",
+    "algorithm": "lqr",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.16,
+    "length": 0.6,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "perturb"
+    ]
+  },
+  {
+    "id": "lqr-cart-120",
+    "algorithm": "lqr",
+    "scenario": "pulse",
+    "cart_mass": 1.2,
+    "rod_mass": 0.2,
+    "length": 0.6,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "perturb"
+    ]
+  },
+  {
+    "id": "lqr-mass-120",
+    "algorithm": "lqr",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.24,
+    "length": 0.6,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "perturb"
+    ]
+  },
+  {
+    "id": "lqr-length-50",
+    "algorithm": "lqr",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.3,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "scan"
+    ]
+  },
+  {
+    "id": "lqr-length-60",
+    "algorithm": "lqr",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.36,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "scan"
+    ]
+  },
+  {
+    "id": "lqr-length-70",
+    "algorithm": "lqr",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.42,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "scan"
+    ]
+  },
+  {
+    "id": "lqr-length-80",
+    "algorithm": "lqr",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.48,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "perturb",
+      "scan"
+    ]
+  },
+  {
+    "id": "lqr-length-90",
+    "algorithm": "lqr",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.54,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "scan"
+    ]
+  },
+  {
+    "id": "lqr-length-110",
+    "algorithm": "lqr",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.66,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "scan"
+    ]
+  },
+  {
+    "id": "lqr-length-120",
+    "algorithm": "lqr",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.72,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "perturb",
+      "scan"
+    ]
+  },
+  {
+    "id": "lqr-length-130",
+    "algorithm": "lqr",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.78,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "scan"
+    ]
+  },
+  {
+    "id": "lqr-length-140",
+    "algorithm": "lqr",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.84,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "scan"
+    ]
+  },
+  {
+    "id": "lqr-length-150",
+    "algorithm": "lqr",
+    "scenario": "pulse",
+    "cart_mass": 1,
+    "rod_mass": 0.2,
+    "length": 0.9,
+    "initial_angle_deg": 0,
+    "duration": 14,
+    "groups": [
+      "scan"
+    ]
+  }
+]

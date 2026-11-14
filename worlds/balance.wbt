@@ -1,0 +1,103 @@
+#VRML_SIM R2025a utf8
+
+WorldInfo {
+  title "Task 03(a) - cart and single inverted pendulum"
+  basicTimeStep 2
+  gravity 9.81
+  coordinateSystem "ENU"
+  randomSeed 1
+  physicsDisableLinearThreshold 0
+  physicsDisableAngularThreshold 0
+}
+Viewpoint {
+  position 0.09 -1.95 0.42
+  orientation 0 0 1 1.570796326795
+  fieldOfView 0.88
+}
+Background { skyColor [ 0.075 0.11 0.16 ] }
+DirectionalLight { direction -0.5 0.7 -1 ambientIntensity 0.55 intensity 1.6 }
+DirectionalLight { direction 0.3 -0.5 -1 intensity 0.8 }
+
+# The guide and its two reference marks are visible scenery. Only the joints constrain the cart.
+Pose {
+  translation 0 0 0
+  children [ Shape {
+    appearance PBRAppearance { baseColor 0.36 0.47 0.56 metalness 0.25 roughness 0.6 }
+    geometry Box { size 3.3 0.15 0.02 }
+  } ]
+}
+Pose {
+  translation 0 -0.079 -0.008
+  children [ Shape {
+    appearance PBRAppearance { baseColor 0.82 0.85 0.86 roughness 1 metalness 0 }
+    geometry Box { size 0.009 0.006 0.04 }
+  } ]
+}
+Pose {
+  translation 0.2 -0.079 -0.008
+  children [ Shape {
+    appearance PBRAppearance { baseColor 0.96 0.55 0.18 roughness 1 metalness 0 }
+    geometry Box { size 0.009 0.006 0.04 }
+  } ]
+}
+
+Robot {
+  name "cart-pole test rig"
+  supervisor TRUE
+  controller "balance"
+  controllerArgs [ "--algorithm=lqr" "--scenario=demo" ] # @arguments
+  children [
+    SliderJoint {
+      jointParameters JointParameters {
+        axis 1 0 0
+        dampingConstant 0.05
+        minStop -1.6
+        maxStop 1.6
+      }
+      device [
+        LinearMotor { name "drive" maxForce 10 sound "" }
+        PositionSensor { name "cart_encoder" }
+      ]
+      endPoint DEF CART Solid {
+        translation 0 0 0.072
+        name "cart"
+        children [
+          Shape {
+            appearance PBRAppearance { baseColor 0.055 0.57 0.70 metalness 0.12 roughness 0.4 }
+            geometry DEF CHASSIS Box { size 0.21 0.13 0.11 }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 1 0
+              anchor 0 0 0.065
+              position 0.0872664625997 # @angle
+              dampingConstant 0.002
+            }
+            device [ PositionSensor { name "pendulum_encoder" } ]
+            endPoint Solid {
+              name "uniform rod"
+              translation 0.0261467228243 0 0.363858409428 # @rod_center
+              rotation 0 1 0 0.0872664625997 # @rotation
+              children [
+                Shape {
+                  appearance PBRAppearance { baseColor 0.99 0.64 0.18 metalness 0.13 roughness 0.4 }
+                  geometry DEF ROD Box { size 0.02 0.02 0.6 } # @rod_box
+                }
+              ]
+              boundingObject USE ROD
+              physics Physics {
+                density -1
+                mass 0.2 # @rod_mass
+              }
+            }
+          }
+        ]
+        boundingObject USE CHASSIS
+        physics Physics {
+          density -1
+          mass 1 # @cart_mass
+        }
+      }
+    }
+  ]
+}
