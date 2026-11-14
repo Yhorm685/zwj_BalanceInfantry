@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.exe
+*.o
+*.d
+*.dll
+build/
+.local/
+worlds/.generated-*.wbt
+worlds/.*.wbproj
+*.log
